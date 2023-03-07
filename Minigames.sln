@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FalloutHacking", "FalloutHa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "..\csapi\common\common.csproj", "{84A58631-C5C4-4EEB-86CD-B550E974BF30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textUI", "..\csapi\textUI\textUI.csproj", "{6F1B6A98-7B22-4703-A02F-A43401123FFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{84A58631-C5C4-4EEB-86CD-B550E974BF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84A58631-C5C4-4EEB-86CD-B550E974BF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84A58631-C5C4-4EEB-86CD-B550E974BF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F1B6A98-7B22-4703-A02F-A43401123FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1B6A98-7B22-4703-A02F-A43401123FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1B6A98-7B22-4703-A02F-A43401123FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1B6A98-7B22-4703-A02F-A43401123FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
