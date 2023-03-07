@@ -74,7 +74,7 @@ public class FalloutHacking
 
             if (!hacked)
             {
-                UI.WriteOutput($"Invalid password [0x{CompareWords(solution, used):X}]; remaining {--attemptsLeft}");
+                UI.WriteOutput($"Invalid password [{CompareWords(solution, used)}]; remaining {--attemptsLeft}");
             } else UI.WriteOutput("You're in!");
         }
         
