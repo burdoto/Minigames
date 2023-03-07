@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using comroid.common;
+using comroid.textUI;
+using comroid.textUI.stdio;
 
 namespace FalloutHacking;
 
@@ -28,13 +30,15 @@ public class Program
         }
     };
 
-    public static void Main(string[] args) => new Program(Difficulty.Easy, 4).play();
+    public static void Main(string[] args) => new Program(new ConsoleUIModule(), Difficulty.Easy, 4).play();
 
+    public UIModule UI { get; }
     public string[] Words { get; }
     public int UseIndex { get; }
 
-    private Program(Difficulty difficulty, int letters, int wordCount = 8)
+    private Program(UIModule ui, Difficulty difficulty, int letters, int wordCount = 8)
     {
+        this.UI = ui;
         this._difficulty = difficulty;
         this.UseIndex = new Random().Next(0, wordCount);
         do this.Words = WordRepo[letters].Shuffle().ToArray()[..wordCount];
@@ -48,11 +52,11 @@ public class Program
 
         void PrintWords()
         {
-            Console.WriteLine("Words available:");
+            UI.WriteOutput("Words available:");
             for (var i = 0; i < Words.Length; i++)
             {
                 var word = Words[i];
-                Console.WriteLine($"\t- {i}:\t{word}");
+                UI.WriteOutput($"\t- {i}:\t{word}");
             }
         }
         
@@ -60,9 +64,7 @@ public class Program
 
         while (!hacked && attemptsLeft > 0)
         {
-
-            Console.Write("> ");
-            var input = Console.ReadLine()!;
+            var input = UI.WaitForInput()!;
             var solution = Words[UseIndex];
             string used;
             if (Regex.IsMatch(input, "\\d+"))
@@ -75,12 +77,12 @@ public class Program
 
             if (!hacked)
             {
-                Console.WriteLine($"Invalid [0x{CompareWords(solution, used):X}]; remaining {--attemptsLeft}");
-            } else Console.WriteLine("You're in!");
+                UI.WriteOutput($"Invalid [0x{CompareWords(solution, used):X}]; remaining {--attemptsLeft}");
+            } else UI.WriteOutput("You're in!");
         }
         
         if (!hacked)
-            Console.WriteLine("Locked out");
+            UI.WriteOutput("Locked out");
     }
 
     private static int CompareWords(string solution, string used)
