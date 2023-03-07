@@ -38,10 +38,11 @@ public class FalloutHacking
         // store variables
         this.UI = ui;
         this._difficulty = difficulty;
-        this.UseIndex = new Random().Next(0, wordCount);
         // if wordCount was not set, set it to its default value
         if (wordCount == -1)
             wordCount = 32 / (int)difficulty;
+        // select an index to use for the solution
+        this.UseIndex = new Random().Next(0, wordCount);
         // fetch all words with the specified letter count
         var dict = ((IDictionary<string, JsonNode?>)JsonNode.Parse(new HttpClient()
                     .GetStringAsync(
