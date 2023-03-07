@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using comroid.common;
 using comroid.textUI;
 using comroid.textUI.stdio;
@@ -13,35 +14,31 @@ public enum Difficulty : int
     Hard = 2
 }
 
-public class Program
+public class FalloutHacking
 {
     private readonly Difficulty _difficulty;
 
-    public static readonly Dictionary<int, string[]> WordRepo = new()
-    {
-        {
-            4,
-            new[]
-            {
-                "Door", "Home", "Room", "Tree", "Pear", "Bone",
-                "Dash", "Four", "Pure", "Poor", "Duck", "Fish",
-                "Five", "Nine", "Army", "Baby", "Dark", "Farm"
-            }
-        }
-    };
-
-    public static void Main(string[] args) => new Program(new ConsoleUIModule(), Difficulty.Easy, 4).play();
+    public static void Main(string[] args) => new FalloutHacking(new ConsoleUIModule(), Difficulty.Easy, new Random().Next(4, 10)).play();
 
     public UIModule UI { get; }
     public string[] Words { get; }
     public int UseIndex { get; }
 
-    private Program(UIModule ui, Difficulty difficulty, int letters, int wordCount = 8)
+    private FalloutHacking(UIModule ui, Difficulty difficulty, int letters, int wordCount = -1)
     {
         this.UI = ui;
         this._difficulty = difficulty;
+        if (wordCount == -1)
+            wordCount = 32 / (int)difficulty;
         this.UseIndex = new Random().Next(0, wordCount);
-        do this.Words = WordRepo[letters].Shuffle().ToArray()[..wordCount];
+        var dict = ((IDictionary<string, JsonNode?>)JsonNode.Parse(new HttpClient()
+                    .GetStringAsync(
+                        new Uri("https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json"))
+                    .Await())!
+                .AsObject()).Keys
+            .Where(w => w.Length == letters)
+            .ToArray();
+        do this.Words = dict.Shuffle().ToArray()[..wordCount];
         while (Words.Count(w => CompareWords(Words[UseIndex], w) == 0) > wordCount * ((int)difficulty / wordCount));
     }
 
@@ -77,12 +74,12 @@ public class Program
 
             if (!hacked)
             {
-                UI.WriteOutput($"Invalid [0x{CompareWords(solution, used):X}]; remaining {--attemptsLeft}");
+                UI.WriteOutput($"Invalid password [0x{CompareWords(solution, used):X}]; remaining {--attemptsLeft}");
             } else UI.WriteOutput("You're in!");
         }
         
         if (!hacked)
-            UI.WriteOutput("Locked out");
+            UI.WriteOutput($"Locked out; password was {Words[UseIndex]}");
     }
 
     private static int CompareWords(string solution, string used)
