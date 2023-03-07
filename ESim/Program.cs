@@ -38,8 +38,6 @@ public class Program : Game
         graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
         // TODO: Add your drawing code here
-        
-        graphics.GraphicsDevice.;
 
         base.Draw(gameTime);
     }
