@@ -14,6 +14,11 @@ public class Program : Game
         graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
     }
+
+    public static void Main(string[] args)
+    {
+        throw new NotImplementedException();
+    }
     
     protected override void LoadContent()
     {
