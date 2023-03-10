@@ -13,38 +13,22 @@ public class FalloutHackingTerminalWindow : GameBase
 
     public FalloutHackingTerminalWindow()
     {
+        Instance = this;
         Background = new Color(0x313338ff);
         Add(new TerminalScreen(this));
     }
 
-    public static void Main(string[] args)
-    {
-        (Instance = new FalloutHackingTerminalWindow()).Run();
-    }
+    public static void Main(string[] args) => new FalloutHackingTerminalWindow().Run();
 }
 
 internal class TerminalScreen : Rect
 {
-    private readonly Hoverable hoverable;
-    private readonly Clickable clickable;
-
     public TerminalScreen(IGameObject gameObject) : base(gameObject, gameObject)
     {
-        Position = Vector3.One * 300;
-        Scale = Vector3.One * 200;
+        Position = FalloutHackingTerminalWindow.Instance.Window.GetView().Center.To3();
+        Scale = new Vector3(1200,800,0);
+        Color = new Color(0x9a8c7bff);
 
-        Add(this.hoverable = new Hoverable(this));
-        Add(this.clickable = new Clickable(this));
-        clickable.Click += _ => Log.Debug.At(LogLevel.Info, "test");
-    }
-
-    public override bool Update()
-    {
-        if (clickable.Clicking)
-            Delegate.FillColor = Color.Blue;
-        else if (hoverable.Hovering)
-            Delegate.FillColor = Color.Red;
-        else Delegate.FillColor = new Color(0xd7c4abff);
-        return base.Update();
+        Add(new Rect(GameObject, this) { Scale = Vector3.One * 0.85f, Color = Color.Black });
     }
 }
