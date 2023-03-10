@@ -18,6 +18,18 @@ public class FalloutHackingTerminalWindow : GameBase
         Add(new TerminalScreen(this));
     }
 
+    public override bool Update()
+    {
+#if DEBUG
+        if (Input.GetKey(Keyboard.Key.W)) Camera.Position += new Vector3(0, -3, 0);
+        if (Input.GetKey(Keyboard.Key.S)) Camera.Position += new Vector3(0, 3, 0);
+        if (Input.GetKey(Keyboard.Key.A)) Camera.Position += new Vector3(-3, 0, 0);
+        if (Input.GetKey(Keyboard.Key.D)) Camera.Position += new Vector3(3, 0, 0);
+#endif
+
+        return base.Update();
+    }
+
     public static void Main(string[] args) => new FalloutHackingTerminalWindow().Run();
 }
 
