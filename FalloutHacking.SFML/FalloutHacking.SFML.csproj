@@ -5,11 +5,10 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>comroid.ESim</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\csapi\gamelib\gamelib.csproj" />
+      <ProjectReference Include="..\FalloutHacking\FalloutHacking.csproj" />
     </ItemGroup>
 
 </Project>
