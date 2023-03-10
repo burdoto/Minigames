@@ -29,7 +29,7 @@ internal class TerminalScreen : Rect
         Position = Vector3.One * 300;
         Scale = Vector3.One * 200;
         
-        var hoverable = new Hoverable(GameObject);
+        var hoverable = new Hoverable(this);
         hoverable.HoverBegin += _ => Delegate.FillColor = Color.Red;
         hoverable.HoverEnd += _ => Delegate.FillColor = new Color(0xd7c4abff);
         Add(hoverable);
