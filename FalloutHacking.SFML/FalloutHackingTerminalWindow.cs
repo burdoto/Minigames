@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using comroid.common;
 using comroid.gamelib;
 using comroid.gamelib.Capability;
 using SFML.Graphics;
@@ -24,14 +25,26 @@ public class FalloutHackingTerminalWindow : GameBase
 
 internal class TerminalScreen : Rect
 {
+    private readonly Hoverable hoverable;
+    private readonly Clickable clickable;
+
     public TerminalScreen(IGameObject gameObject) : base(gameObject, gameObject)
     {
         Position = Vector3.One * 300;
         Scale = Vector3.One * 200;
-        
-        var hoverable = new Hoverable(this);
-        hoverable.HoverBegin += _ => Delegate.FillColor = Color.Red;
-        hoverable.HoverEnd += _ => Delegate.FillColor = new Color(0xd7c4abff);
-        Add(hoverable);
+
+        Add(this.hoverable = new Hoverable(this));
+        Add(this.clickable = new Clickable(this));
+        clickable.Click += _ => Log.Debug.At(LogLevel.Info, "test");
+    }
+
+    public override bool Update()
+    {
+        if (clickable.Clicking)
+            Delegate.FillColor = Color.Blue;
+        else if (hoverable.Hovering)
+            Delegate.FillColor = Color.Red;
+        else Delegate.FillColor = new Color(0xd7c4abff);
+        return base.Update();
     }
 }
