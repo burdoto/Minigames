@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using comroid.gamelib;
+using comroid.gamelib.Capability;
 using SFML.Graphics;
 
 namespace FalloutHacking.SFML;
@@ -27,8 +28,10 @@ internal class TerminalScreen : Rect
     {
         Position = Vector3.One * 300;
         Scale = Vector3.One * 200;
-        Delegate.FillColor = new Color(0xd7c4abff);
-
-        Add(new Circle(GameObject) { Position = Vector3.One * 50, Radius = 60 });
+        
+        var hoverable = new Hoverable(GameObject);
+        hoverable.HoverBegin += _ => Delegate.FillColor = Color.Red;
+        hoverable.HoverEnd += _ => Delegate.FillColor = new Color(0xd7c4abff);
+        Add(hoverable);
     }
 }
