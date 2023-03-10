@@ -8,7 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\csapi\gamelib\gamelib.csproj" />
       <ProjectReference Include="..\FalloutHacking\FalloutHacking.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Assets\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Assets" />
     </ItemGroup>
 
 </Project>
