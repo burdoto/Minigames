@@ -4,7 +4,7 @@ namespace Brick.NET;
 
 public class PlayBall : GameObject
 {
-    public PlayBall()
+    public PlayBall(GameBase game) : base(game)
     {
     }
 }

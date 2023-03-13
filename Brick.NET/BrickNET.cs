@@ -11,8 +11,9 @@ public class BrickNET : GameBase
     {
         Instance = this;
 
-        Add(new Player());
-        Add(new Board());
+        // order sensitive!
+        Add(new Board(this));
+        Add(new Player(this));
     }
 
     public override bool Enable()
