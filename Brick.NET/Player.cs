@@ -3,6 +3,7 @@ using comroid.common;
 using comroid.gamelib;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace Brick.NET;
 
@@ -40,6 +41,11 @@ public class Player : GameObject
         var isPointInside = area.IsPointInside(pos);
         if (isPointInside)
             bar.Position = pos.To3();
+
+        if (Input.GetKey(Mouse.Button.Left) && attached != null)
+            attached.Release();
+        else if (attached != null) attached.Position = bar.Position - Vector3.UnitY * 25;
+
         return base.EarlyUpdate();
     }
 
