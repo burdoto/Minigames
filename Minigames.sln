@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{E713DD57-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FalloutHacking", "FalloutHacking", "{F2C7CAE9-8A56-48B3-9D7A-4F9590343521}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brick.NET", "Brick.NET\Brick.NET.csproj", "{60C778D2-C720-4274-B731-24BEE2EAC3D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{F91816B3-93C7-4C57-800E-C0A024341949}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91816B3-93C7-4C57-800E-C0A024341949}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91816B3-93C7-4C57-800E-C0A024341949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C778D2-C720-4274-B731-24BEE2EAC3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C778D2-C720-4274-B731-24BEE2EAC3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C778D2-C720-4274-B731-24BEE2EAC3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C778D2-C720-4274-B731-24BEE2EAC3D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{84A58631-C5C4-4EEB-86CD-B550E974BF30} = {E713DD57-A707-45A3-BAF9-78A5E17CBA8F}
