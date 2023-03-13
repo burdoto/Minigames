@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using comroid.gamelib;
+using comroid.gamelib.Capability;
 using SFML.System;
 
 namespace Brick.NET;
@@ -21,6 +22,7 @@ public class Board : GameObject
             {
                 var box = new Rect(this) { Position = pos.To3(), Size = size };
                 box.Add(new Rect.Collider(this, box));
+                box.Add<Rigidbody>();
                 Add(box);
             }
 

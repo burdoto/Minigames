@@ -43,7 +43,10 @@ public class Player : GameObject
             bar.Position = pos.To3();
 
         if (Input.GetKey(Mouse.Button.Left) && attached != null)
-            attached.Release();
+        {
+            attached.ReleaseFromBar();
+            attached = null;
+        }
         else if (attached != null) attached.Position = bar.Position - Vector3.UnitY * 25;
 
         return base.EarlyUpdate();

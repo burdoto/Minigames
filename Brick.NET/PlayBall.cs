@@ -1,17 +1,26 @@
-﻿using comroid.gamelib;
-using SFML.Graphics;
+﻿using System.Numerics;
+using comroid.gamelib;
+using comroid.gamelib.Capability;
 
 namespace Brick.NET;
 
 public class PlayBall : GameObject
 {
+    private readonly Rigidbody rigidbody;
+
     public PlayBall(GameBase game) : base(game)
     {
-        Add(new Circle(this) { Radius = 15, Color = Color.Blue });
+        Add(new Circle(this) { Radius = 15 });
+        this.rigidbody = Add<Rigidbody>()!;
+        rigidbody.Collide += OnCollide;
     }
 
-    public void Release()
+    private void OnCollide(ICollider obj)
     {
-        throw new NotImplementedException();
+    }
+
+    public void ReleaseFromBar()
+    {
+        rigidbody.Velocity = -Vector3.UnitY;
     }
 }
