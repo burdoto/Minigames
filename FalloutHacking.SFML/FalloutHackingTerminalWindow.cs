@@ -5,6 +5,7 @@ using comroid.gamelib.Capability;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using Sprite = comroid.gamelib.Sprite;
 using Text = comroid.gamelib.Text;
 
 namespace FalloutHacking.SFML;
@@ -12,6 +13,7 @@ namespace FalloutHacking.SFML;
 public class FalloutHackingTerminalWindow : GameBase
 {
     public static Font RubikIso = new("Assets/RubikIso-Regular.ttf");
+    public static Texture Monitor = new("Assets/monitor.png");
     public static FalloutHackingTerminalWindow Instance { get; private set; } = null!;
 
     public FalloutHackingTerminalWindow()
@@ -43,12 +45,12 @@ internal class TerminalScreen : Rect
         Size = new Vector2f(1200,800);
         Color = new Color(0x9a8c7bff);
 
-        var bg = new Rect(GameObject, this) { Size = new Vector2f(1000, 750), Color = Color.Black };
+        var bg = new Sprite(GameObject, this) { Texture = FalloutHackingTerminalWindow.Monitor };
         Add(bg);
-        Add(new TitleBox(GameObject, bg){Position = Vector3.UnitY * -250, Size = new Vector2f(950, 200) });
-        Add(new MemBox(GameObject, bg){Position = new Vector3(-320, 90, 0), Size = new Vector2f(340, 250) });
-        Add(new MemBox(GameObject, bg){Position = new Vector3(40, 90, 0), Size = new Vector2f(340, 250) });
-        Add(new ConsoleBox(GameObject, bg){Position = new Vector3(365, 90, 0), Size = new Vector2f(250, 200) });
+        Add(new TitleBox(GameObject, bg) { Position = Vector3.UnitY * -250, Size = new Vector2f(950, 200) });
+        Add(new MemBox(GameObject, bg) { Position = new Vector3(-320, 90, 0), Size = new Vector2f(340, 250) });
+        Add(new MemBox(GameObject, bg) { Position = new Vector3(40, 90, 0), Size = new Vector2f(340, 250) });
+        Add(new ConsoleBox(GameObject, bg) { Position = new Vector3(365, 90, 0), Size = new Vector2f(250, 200) });
     }
     
     private class TitleBox : Rect
