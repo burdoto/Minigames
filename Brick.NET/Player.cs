@@ -38,7 +38,6 @@ public class Player : GameObject
     {
         var pos = Input.MousePosition;
         var isPointInside = area.IsPointInside(pos);
-        Console.WriteLine($"Mouse at {pos}, isInside = {isPointInside}");
         if (isPointInside)
             bar.Position = pos.To3();
         return base.EarlyUpdate();
