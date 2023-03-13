@@ -7,13 +7,19 @@ public class BrickNET : GameBase
 {
     public static BrickNET Instance { get; private set; } = null!;
 
-    public BrickNET(RenderWindow window = null) : base(window)
+    public BrickNET(RenderWindow window = null!) : base(window)
     {
         Instance = this;
 
-        Add(new PlayBall());
         Add(new Player());
         Add(new Board());
+    }
+
+    public override bool Enable()
+    {
+        FindComponent<Player>()!.SpawnBall();
+        
+        return base.Enable();
     }
 
     public static void Main(string[] args)

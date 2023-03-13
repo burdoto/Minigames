@@ -9,4 +9,8 @@ public class Player : GameObject
         // the bar
         Add(new Rect(this));
     }
+
+    public void SpawnBall()
+    {
+    }
 }
