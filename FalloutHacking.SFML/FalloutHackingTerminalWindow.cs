@@ -3,6 +3,7 @@ using comroid.common;
 using comroid.gamelib;
 using comroid.gamelib.Capability;
 using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using Text = comroid.gamelib.Text;
 
@@ -39,15 +40,15 @@ internal class TerminalScreen : Rect
 {
     public TerminalScreen(IGameObject gameObject) : base(gameObject, gameObject)
     {
-        Scale = new Vector3(1200,800,0);
+        Size = new Vector2f(1200,800);
         Color = new Color(0x9a8c7bff);
 
-        var bg = new Rect(GameObject, this) { Scale = Vector3.One * 0.85f, Color = Color.Black };
+        var bg = new Rect(GameObject, this) { Size = new Vector2f(1000, 750), Color = Color.Black };
         Add(bg);
-        Add(new TitleBox(GameObject, bg){Position = Vector3.UnitY * -250, Scale = new Vector3(0.978f, 0.2f, 0) });
-        Add(new MemBox(GameObject, bg){Position = new Vector3(-320, 90, 0), Scale = new Vector3(0.34f, 0.7f, 0) });
-        Add(new MemBox(GameObject, bg){Position = new Vector3(40, 90, 0), Scale = new Vector3(0.34f, 0.7f, 0) });
-        Add(new ConsoleBox(GameObject, bg){Position = new Vector3(365, 90, 0), Scale = new Vector3(0.25f, 0.7f, 0) });
+        Add(new TitleBox(GameObject, bg){Position = Vector3.UnitY * -250, Size = new Vector2f(950, 200) });
+        Add(new MemBox(GameObject, bg){Position = new Vector3(-320, 90, 0), Size = new Vector2f(340, 250) });
+        Add(new MemBox(GameObject, bg){Position = new Vector3(40, 90, 0), Size = new Vector2f(340, 250) });
+        Add(new ConsoleBox(GameObject, bg){Position = new Vector3(365, 90, 0), Size = new Vector2f(250, 200) });
     }
     
     private class TitleBox : Rect
