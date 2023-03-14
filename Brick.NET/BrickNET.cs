@@ -12,6 +12,7 @@ public class BrickNET : GameBase
     public const int Spacing = 5;
     public static readonly (Vector2 position, Vector2 size)[] PlayerArea = new[]
         { (new Vector2(0, 350), new Vector2(1700, 200)) };
+    public static readonly Vector2 PlayArea = new(1700, 900);
     public static BrickNET Instance { get; private set; } = null!;
     private Text score;
 
@@ -24,7 +25,12 @@ public class BrickNET : GameBase
     public BrickNET(RenderWindow window = null!) : base(window)
     {
         Instance = this;
-
+        
+        var r = Add<Rect>("PlayArea")!;
+        r.Size = PlayArea.To2f();
+        r.Color = new Color(0x111111ff);
+        var c = r.Add<Rect.Collider>()!;
+        c.Inverse = true; //todo Fix
         // order sensitive!
         FillBoard();
         Add(new Player(this));
