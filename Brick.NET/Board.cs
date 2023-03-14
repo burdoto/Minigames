@@ -15,18 +15,16 @@ public class Board : GameObject
     public Board(GameBase game) : base(game)
     {
         var size = new Vector2f(BoxWidth, BoxHeight);
+        void AddBox(Vector2 pos)
+        {
+            var box = new Rect(this) { Position = pos.To3(), Size = size };
+            box.Add<Rect.Collider>();
+            box.Add<Rigidbody>();
+            Add(box);
+        }
+        
         for (var x = -8; x <= 8; x++)
         for (var y = -16; y <= 0; y++)
-        {
-            void CreateBox(Vector2 pos)
-            {
-                var box = new Rect(this) { Position = pos.To3(), Size = size };
-                box.Add(new Rect.Collider(this, box));
-                box.Add<Rigidbody>();
-                Add(box);
-            }
-
-            CreateBox(new Vector2(x * BoxWidth + (x - 1) * Spacing, y * BoxHeight + (y - 1) * Spacing));
-        }
+            AddBox(new Vector2(x * BoxWidth + (x - 1) * Spacing, y * BoxHeight + (y - 1) * Spacing));
     }
 }
