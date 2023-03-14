@@ -51,7 +51,7 @@ public class Player : GameObject
         }
         else if (attached != null) attached.Position = bar.Position - Vector3.UnitY * 26;
 
-        return base.EarlyUpdate();
+        return base.Update();
     }
 
     public void SpawnBall()
