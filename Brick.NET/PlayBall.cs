@@ -27,10 +27,16 @@ public class PlayBall : GameObject
         {
             if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick)
             {
-                Game.As<BrickNET>().Score += brick.value;
+                Game.As<BrickNET>()!.Score += brick.value;
                 brick.Destroy();
             }
         }
+    }
+
+    public override bool Update()
+    {
+        Position = Position.To2().To3(1);
+        return base.Update();
     }
 
     public void ReleaseFromBar()
