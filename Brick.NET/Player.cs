@@ -31,7 +31,7 @@ public class Player : GameObject
 #endif
 
         // the bar
-        this.bar = new Rect(this) { Size = new Vector2f(250, 20) };
+        this.bar = new Rect(this) { Position = area.position.To3(), Size = new Vector2f(250, 20) };
         Add(bar);
     }
 
