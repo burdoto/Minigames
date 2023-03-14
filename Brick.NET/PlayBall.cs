@@ -8,6 +8,7 @@ namespace Brick.NET;
 public class PlayBall : GameObject
 {
     public const int Radius = 15;
+    public const float SpawnSpeed = 0.5f;
     private readonly Rigidbody rigidbody;
 
     public PlayBall(GameBase game) : base(game)
@@ -41,6 +42,6 @@ public class PlayBall : GameObject
 
     public void ReleaseFromBar()
     {
-        rigidbody.Velocity = -Vector3.UnitY * 0.2f;
+        rigidbody.Velocity = -Vector3.UnitY * SpawnSpeed;
     }
 }
