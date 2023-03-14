@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using comroid.common;
 using comroid.gamelib;
 using comroid.gamelib.Capability;
 
@@ -14,18 +15,26 @@ public class PlayBall : GameObject
         var c = Add<Circle>()!;
         c.Radius = Radius;
         c.Add<Circle.Collider>();
-        this.rigidbody = Add<Rigidbody>("PlayBall")!;
+        this.rigidbody = Add<Rigidbody>()!;
         rigidbody.Bounciness = 1;
         rigidbody.Collide += OnCollide;
     }
 
-    private void OnCollide(ICollider obj)
+    private void OnCollide(Collision collision)
     {
-        Console.WriteLine($"{this} collided with {obj.GameObject}");
+        if (!(collision.Cancelled = collision.CollidedWith.GameObject?.Name != Brick.NameId &&
+                                  (!collision.CollidedWith.GameObject?.Name.StartsWith("Player") ?? false)))
+        {
+            if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick)
+            {
+                Game.As<BrickNET>().Score += brick.value;
+                brick.Destroy();
+            }
+        }
     }
 
     public void ReleaseFromBar()
     {
-        rigidbody.Velocity = -Vector3.UnitY * 0.1f;
+        rigidbody.Velocity = -Vector3.UnitY * 0.2f;
     }
 }

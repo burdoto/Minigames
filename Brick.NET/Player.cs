@@ -12,15 +12,16 @@ public class Player : GameObject
     private readonly int number = 0;
     private readonly Rect.Collider area;
     private readonly Rect bar;
-    private PlayBall? attached;
+    internal PlayBall? attached;
 
     public Player(GameBase game) : base(game)
     {
+        this.Name = "Player" + (number + 1);
         // player area
-        var area = game.FindComponent<Board>()!.PlayerArea[number];
+        var area = BrickNET.PlayerArea[number];
         var rect = new Rect(this)
         {
-            Position = area.position.To3(),
+            Position = area.position.To3(-1),
             Size = area.size.To2f(),
             Color = new Color(0x222222ff)
         };
@@ -32,6 +33,7 @@ public class Player : GameObject
 
         // the bar
         this.bar = new Rect(this) { Position = area.position.To3(), Size = new Vector2f(250, 20) };
+        bar.Add<Rect.Collider>();
         Add(bar);
     }
 
@@ -47,7 +49,7 @@ public class Player : GameObject
             attached.ReleaseFromBar();
             attached = null;
         }
-        else if (attached != null) attached.Position = bar.Position - Vector3.UnitY * 25;
+        else if (attached != null) attached.Position = bar.Position - Vector3.UnitY * 26;
 
         return base.EarlyUpdate();
     }
