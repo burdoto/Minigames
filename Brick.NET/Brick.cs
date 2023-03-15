@@ -23,6 +23,6 @@ public class Brick : GameObject
         r.Size = new Vector2f(Width, Height);
         r.Color = new Color((uint)DebugUtil.RNG.Next(int.MaxValue) | 0x000000ff);
         r.Add<Rect.Collider>();
-        Add<Rigidbody>();
+        Add<Rigidbody>()!.Bounciness = 1;
     }
 }
