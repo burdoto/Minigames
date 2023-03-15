@@ -16,6 +16,7 @@ public class Player : GameObject
 
     public Player(GameBase game) : base(game)
     {
+        Channel = Channel.Player;
         this.Name = "Player" + (number + 1);
         // player area
         var area = BrickNET.PlayerArea[number];

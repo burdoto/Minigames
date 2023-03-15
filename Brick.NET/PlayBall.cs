@@ -13,6 +13,7 @@ public class PlayBall : GameObject
 
     public PlayBall(GameBase game) : base(game)
     {
+        Channel = Channel.Props | Channel.Player;
         var c = Add<Circle>()!;
         c.Radius = Radius;
         c.Add<Circle.Collider>();
@@ -23,14 +24,10 @@ public class PlayBall : GameObject
 
     private void OnCollide(Collision collision)
     {
-        if (!(collision.Cancelled = collision.CollidedWith.GameObject?.Name != Brick.NameId &&
-                                  (!collision.CollidedWith.GameObject?.Name.StartsWith("Player") ?? false)))
+        if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick)
         {
-            if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick)
-            {
-                Game.As<BrickNET>()!.Score += brick.value;
-                brick.Destroy();
-            }
+            Game.As<BrickNET>()!.Score += brick.value;
+            brick.Destroy();
         }
     }
 

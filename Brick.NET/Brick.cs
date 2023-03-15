@@ -17,6 +17,7 @@ public class Brick : GameObject
 
     public Brick(BrickNET game, Vector2 pos) : base(game)
     {
+        Channel = Channel.Props;
         Position = pos.To3();
         var r = Add<Rect>()!;
         r.Size = new Vector2f(Width, Height);
