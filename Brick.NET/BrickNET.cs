@@ -45,6 +45,8 @@ public class BrickNET : GameBase
         // order sensitive!
         FillBoard();
         Add(new Player(this));
+        Load();
+        Enable();
     }
 
     private void StopGame()
