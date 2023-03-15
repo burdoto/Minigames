@@ -39,6 +39,6 @@ public class PlayBall : GameObject
 
     public void ReleaseFromBar()
     {
-        rigidbody.Velocity = -Vector3.UnitY * SpawnSpeed;
+        rigidbody.Velocity = new Vector3(0.5f, -1, 0) * SpawnSpeed;
     }
 }
