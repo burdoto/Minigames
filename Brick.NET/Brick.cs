@@ -25,4 +25,10 @@ public class Brick : GameObject
         r.Add<Rect.Collider>();
         Add<Rigidbody>()!.Bounciness = 1;
     }
+
+    public new void Destroy()
+    {
+        Game.As<BrickNET>()!.Score += value;
+        base.Destroy();
+    }
 }

@@ -24,11 +24,8 @@ public class PlayBall : GameObject
 
     private void OnCollide(Collision collision)
     {
-        if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick)
-        {
-            Game.As<BrickNET>()!.Score += brick.value;
+        if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick) 
             brick.Destroy();
-        }
     }
 
     public override bool Update()
