@@ -13,7 +13,7 @@ public class Brick : GameObject
     public const int Width = 75;
     public const int Height = 25;
 
-    public int value => (int)FindComponent<Rect>()!.Color.ToInteger();
+    public int Value { get; set; } = 100;
 
     public Brick(BrickNET game, Vector2 pos) : base(game)
     {
@@ -21,14 +21,15 @@ public class Brick : GameObject
         Position = pos.To3();
         var r = Add<Rect>()!;
         r.Size = new Vector2f(Width, Height);
-        r.Color = new Color((uint)DebugUtil.RNG.Next(int.MaxValue) | 0x000000ff);
+        r.Color = new Color((byte)DebugUtil.RNG.Next(byte.MaxValue), (byte)DebugUtil.RNG.Next(byte.MaxValue),
+            (byte)DebugUtil.RNG.Next(byte.MaxValue));
         r.Add<Rect.Collider>();
-        Add<Rigidbody>()!.Bounciness = 1;
+        Add<Rigidbody>()!.Bounciness = 2;
     }
 
     public new void Destroy()
     {
-        Game.As<BrickNET>()!.Score += value;
+        Game.As<BrickNET>()!.Score += Value;
         base.Destroy();
     }
 }
