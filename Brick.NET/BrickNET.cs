@@ -60,7 +60,8 @@ public class BrickNET : GameBase
     {
         for (var x = -10; x <= 10; x++)
         for (var y = -14; y <= 0; y++)
-            Add(new Brick(this, new Vector2(x * Brick.Width + (x - 1) * Spacing, y * Brick.Height + (y - 1) * Spacing)));
+            Add(new Brick(this, new Vector2(x * Brick.Width + (x - 1) * Spacing, y * Brick.Height + (y - 1) * Spacing))
+                { Name = $"Brick({x},{y})" });
     }
 
     public override bool Enable()
