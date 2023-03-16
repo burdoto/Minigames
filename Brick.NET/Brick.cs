@@ -24,7 +24,7 @@ public class Brick : GameObject
         r.Color = new Color((byte)DebugUtil.RNG.Next(byte.MaxValue), (byte)DebugUtil.RNG.Next(byte.MaxValue),
             (byte)DebugUtil.RNG.Next(byte.MaxValue));
         r.Add<Rect.Collider>();
-        Add<Rigidbody>()!.Bounciness = 2;
+        Add<Rigidbody>()!.Bounciness = 1;
     }
 
     public new void Destroy()
