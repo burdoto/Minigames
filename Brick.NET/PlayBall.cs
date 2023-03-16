@@ -20,18 +20,13 @@ public class PlayBall : GameObject
         this.rigidbody = Add<Rigidbody>()!;
         rigidbody.Bounciness = 1;
         rigidbody.Collide += OnCollide;
+        rigidbody.PositionFreeze = Vector3.UnitZ;
     }
 
     private void OnCollide(Collision collision)
     {
         if (collision.CollidedWith.GameObject?.As<Brick?>() is { } brick) 
             brick.Destroy();
-    }
-
-    public override bool Update()
-    {
-        Position = Position.To2().To3(1);
-        return base.Update();
     }
 
     public void ReleaseFromBar()
