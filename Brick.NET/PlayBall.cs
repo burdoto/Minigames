@@ -20,7 +20,7 @@ public class PlayBall : GameObject
         this.rigidbody = Add<Rigidbody>()!;
         rigidbody.Bounciness = 1;
         rigidbody.Collide += OnCollide;
-        rigidbody.PositionFreeze = Vector3.UnitZ;
+        rigidbody.PositionFactor = Vector3.UnitZ;
     }
 
     private void OnCollide(Collision collision)
